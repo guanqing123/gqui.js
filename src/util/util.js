@@ -43,7 +43,7 @@ objectAssign($.fn, {
         }
         this.forEach(($element) => {
             $element.appendChild($child);
-    });
+        });
         return this;
     },
     /**
@@ -53,7 +53,7 @@ objectAssign($.fn, {
     remove: function () {
         this.forEach(($element) => {
             $element.parentNode.removeChild($element);
-    });
+        });
         return this;
     },
     /**
@@ -73,7 +73,7 @@ objectAssign($.fn, {
         this.forEach(($element) => {
             // http://caniuse.com/#search=classList
             $element.classList.add(className);
-    });
+        });
         return this;
     },
     /**
@@ -85,7 +85,7 @@ objectAssign($.fn, {
         this.forEach(($element) => {
             // http://caniuse.com/#search=classList
             $element.classList.remove(className);
-    });
+        });
         return this;
     },
     /**
@@ -103,7 +103,7 @@ objectAssign($.fn, {
     show: function () {
         this.forEach(($element) => {
             $element.style.display = 'block';
-    });
+        });
         return this;
     },
     /**
@@ -113,7 +113,7 @@ objectAssign($.fn, {
     hide: function () {
         this.forEach(($element) => {
             $element.style.display = 'none';
-    });
+        });
         return this;
     },
     /**
@@ -124,7 +124,7 @@ objectAssign($.fn, {
     html: function (html) {
         this.forEach(($element) => {
             $element.innerHTML = html;
-    });
+        });
         return this;
     },
     /**
@@ -135,9 +135,9 @@ objectAssign($.fn, {
     css: function (obj) {
         Object.keys(obj).forEach((key) => {
             this.forEach(($element) => {
-            $element.style[key] = obj[key];
-    });
-    });
+                $element.style[key] = obj[key];
+            });
+        });
         return this;
     },
     /**
@@ -153,19 +153,19 @@ objectAssign($.fn, {
         }
         this.forEach(($element) => {
             eventType.split(' ').forEach((event) => {
-            $element.addEventListener(event, function (evt) {
-            if (isDelegate) {
-                // http://caniuse.com/#search=closest
-                if (this.contains(evt.target.closest(selector))) {
-                    handler.call(evt.target, evt);
-                }
-            }
-            else {
-                handler.call(this, evt);
-            }
+                $element.addEventListener(event, function (evt) {
+                    if (isDelegate) {
+                        // http://caniuse.com/#search=closest
+                        if (this.contains(evt.target.closest(selector))) {
+                            handler.call(evt.target, evt);
+                        }
+                    }
+                    else {
+                        handler.call(this, evt);
+                    }
+                });
+            });
         });
-    });
-    });
         return this;
     },
     /**
@@ -183,16 +183,16 @@ objectAssign($.fn, {
 
         this.forEach(($element) => {
             eventType.split(' ').forEach((event) => {
-            if (typeof selector === 'string') {
-            $element.querySelectorAll(selector).forEach(($element) => {
-                $element.removeEventListener(event, handler);
+                if (typeof selector === 'string') {
+                    $element.querySelectorAll(selector).forEach(($element) => {
+                        $element.removeEventListener(event, handler);
+                    });
+                }
+                else {
+                    $element.removeEventListener(event, handler);
+                }
+            });
         });
-        }
-    else {
-            $element.removeEventListener(event, handler);
-        }
-    });
-    });
         return this;
     },
     /**
@@ -211,10 +211,10 @@ objectAssign($.fn, {
     offAll: function () {
         this.forEach(($element, index) => {
             var clone = $element.cloneNode(true);
-        $element.parentNode.replaceChild(clone, $element);
+            $element.parentNode.replaceChild(clone, $element);
 
-        this[index] = clone;
-    });
+            this[index] = clone;
+        });
         return this;
     },
     /**
@@ -225,7 +225,7 @@ objectAssign($.fn, {
         if(arguments.length){
             this.forEach(($element) => {
                 $element.value = arguments[0];
-        });
+            });
             return this;
         }
         return this[0].value;
@@ -240,9 +240,9 @@ objectAssign($.fn, {
             const that = this;
             Object.keys(attrsObj).forEach((attr) => {
                 that.forEach(($element) => {
-                $element.setAttribute(attr, attrsObj[attr]);
-        });
-        });
+                    $element.setAttribute(attr, attrsObj[attr]);
+                });
+            });
             return this;
         }
 
@@ -252,7 +252,7 @@ objectAssign($.fn, {
 
         this.forEach(($element) => {
             $element.setAttribute(arguments[0], arguments[1]);
-    });
+        });
         return this;
     }
 });
@@ -318,19 +318,19 @@ objectAssign($, {
             // sanitize property name to camelCase
             styleProp = styleProp.replace(/\-(\w)/g, (str, letter) => {
                 return letter.toUpperCase();
-        });
+            });
             value = el.currentStyle[styleProp];
             // convert other units to pixels on IE
             if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
                 return ((value) => {
                     var oldLeft = el.style.left, oldRsLeft = el.runtimeStyle.left;
-                el.runtimeStyle.left = el.currentStyle.left;
-                el.style.left = value || 0;
-                value = el.style.pixelLeft + 'px';
-                el.style.left = oldLeft;
-                el.runtimeStyle.left = oldRsLeft;
-                return value;
-            })(value);
+                    el.runtimeStyle.left = el.currentStyle.left;
+                    el.style.left = value || 0;
+                    value = el.style.pixelLeft + 'px';
+                    el.style.left = oldLeft;
+                    el.runtimeStyle.left = oldRsLeft;
+                    return value;
+                })(value);
             }
             return value;
         }
