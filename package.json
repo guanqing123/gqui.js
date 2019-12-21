@@ -1,0 +1,22 @@
+{
+  "name": "gqui.js",
+  "version": "1.0.0",
+  "description": "gqui.js",
+  "main": "./dist/gqui.min.js",
+  "scripts": {
+    "docs": "node ./build/docs.js"
+  },
+  "keywords": [
+    "gqui",
+    "jquery",
+    "javascript",
+    "zepto"
+  ],
+  "author": "guanqing",
+  "license": "MIT",
+  "dependencies": {
+    "balajs": "^1.0.7",
+    "element-closest": "^3.0.2",
+    "object-assign": "^4.1.1"
+  }
+}
