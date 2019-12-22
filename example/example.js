@@ -1,12 +1,12 @@
 // import 'weui';
 import FastClick from 'fastclick';
-import weui from '../src/weui';
+import gqui from '../src/gqui';
 
 FastClick.attach(document.body);
 
 /* dialog */
 document.querySelector('#alertBtn').addEventListener('click', function () {
-    weui.alert('自定义标题的alert', function () {
+    gqui.alert('自定义标题的alert', function () {
         console.log('ok')
     }, {
         title: '自定义标题'
@@ -16,7 +16,7 @@ document.querySelector('#alertBtn').addEventListener('click', function () {
 
 /* confirm */
 document.querySelector('#confirmBtn').addEventListener('click', function () {
-    weui.confirm('自定义标题的confirm', function () {
+    gqui.confirm('自定义标题的confirm', function () {
         console.log('yes')
     }, function () {
         console.log('no')
@@ -28,7 +28,7 @@ document.querySelector('#confirmBtn').addEventListener('click', function () {
 
 /* toast */
 document.querySelector('#toastBtn').addEventListener('click', function () {
-    weui.toast('操作成功', {
+    gqui.toast('操作成功', {
         duration: 3000,
         className: "bears"
     });
@@ -37,7 +37,7 @@ document.querySelector('#toastBtn').addEventListener('click', function () {
 
 /* loading */
 document.querySelector('#loadingBtn').addEventListener('click', function () {
-    var loading = weui.loading('loading');
+    var loading = gqui.loading('loading');
     setTimeout(function () {
         loading.hide();
     }, 3000);
@@ -46,7 +46,7 @@ document.querySelector('#loadingBtn').addEventListener('click', function () {
 
 /* actionSheet */
 document.querySelector('#actionSheetBtn').addEventListener('click', function () {
-    weui.actionSheet([
+    gqui.actionSheet([
         {
             label: '拍照',
             onClick: function () {
@@ -82,7 +82,7 @@ document.querySelector('#actionSheetBtn').addEventListener('click', function () 
 
 /* topTips */
 document.querySelector('#topTipsBtn').addEventListener('click', function () {
-    weui.topTips('请填写正确的字段', {
+    gqui.topTips('请填写正确的字段', {
         duration: 3000,
         className: "custom-classname",
         callback: function () {
@@ -95,7 +95,7 @@ document.querySelector('#topTipsBtn').addEventListener('click', function () {
 /* picker */
 // 普通选择器
 document.querySelector('#pickerBtn').addEventListener('click', function () {
-    weui.picker([{
+    gqui.picker([{
         label: '飞机票',
         value: 0
     }, {
@@ -145,7 +145,7 @@ document.querySelector('#pickerBtn').addEventListener('click', function () {
 
 // 时间选择器
 document.querySelector('#datePickerBtn').addEventListener('click', function () {
-    weui.datePicker({
+    gqui.datePicker({
         start: '2016-12-29',
         end: '2030-12-29',
         /**
@@ -176,7 +176,7 @@ document.querySelector('#datePickerBtn').addEventListener('click', function () {
 
 // 多列选择器
 document.querySelector('#multiPickerBtn').addEventListener('click', function () {
-    weui.picker([
+    gqui.picker([
         {
             label: '1',
             value: '1'
@@ -216,7 +216,7 @@ document.querySelector('#multiPickerBtn').addEventListener('click', function () 
 
 // 级联选择器
 document.querySelector('#cascadePickerBtn').addEventListener('click', function () {
-    weui.picker([
+    gqui.picker([
         {
             label: '广东',
             value: 0,
@@ -294,7 +294,7 @@ document.querySelector('#cascadePickerBtn').addEventListener('click', function (
 
 
 /* searchbar */
-weui.searchBar('#searchBar');
+gqui.searchBar('#searchBar');
 
 
 /* slider 因为需要获取长度，所以必须要在slider显示的时候才调用weui.slider*/
@@ -305,7 +305,7 @@ function setSlider(){
 
     // 普通slider
     var sliderValue = document.getElementById("sliderValue");
-    weui.slider('#slider', {
+    gqui.slider('#slider', {
         defaultValue: 50,
         onChange: function(percent){
             sliderValue.innerHTML = Math.round(percent);
@@ -315,7 +315,7 @@ function setSlider(){
 
     // 带step的slider
     var sliderStepValue = document.getElementById("sliderStepValue");
-    weui.slider('#sliderStep', {
+    gqui.slider('#sliderStep', {
         step: 10,
         defaultValue: 40,
         onChange: function(percent){
@@ -326,7 +326,7 @@ function setSlider(){
 
     // 分块的slider
     var sliderBlockValue = document.getElementById("sliderBlockValue");
-    weui.slider('#sliderBlock', {
+    gqui.slider('#sliderBlock', {
         step: 100 / 3,
         defaultValue: 33.333,
         onChange: function(percent){
@@ -338,7 +338,7 @@ function setSlider(){
 
 
 /* tab */
-weui.tab('#tab',{
+gqui.tab('#tab',{
     defaultIndex: 0,
     onChange: function(index){
         console.log(index);
@@ -360,17 +360,17 @@ var regexp = {
 };
 
 // 失去焦点时检测
-weui.form.checkIfBlur('#form', regexp);
+gqui.form.checkIfBlur('#form', regexp);
 
 // 表单提交
 document.querySelector('#formSubmitBtn').addEventListener('click', function () {
-    weui.form.validate('#form', function (error) {
+    gqui.form.validate('#form', function (error) {
         console.log(error);
         if (!error) {
-            var loading = weui.loading('提交中...');
+            var loading = gqui.loading('提交中...');
             setTimeout(function () {
                 loading.hide();
-                weui.toast('提交成功', 3000);
+                gqui.toast('提交成功', 3000);
             }, 1500);
         }
     }, regexp);
@@ -380,7 +380,7 @@ document.querySelector('#formSubmitBtn').addEventListener('click', function () {
 /* 图片自动上传 */
 var uploadCount = 0, uploadList = [];
 var uploadCountDom = document.getElementById("uploadCount");
-weui.uploader('#uploader', {
+gqui.uploader('#uploader', {
     url: 'http://' + location.hostname + ':8002/upload',
     auto: true,
     type: 'file',
@@ -451,7 +451,7 @@ document.querySelector('#uploaderFiles').addEventListener('click', function(e){
     var gallery = weui.gallery(url, {
         className: 'custom-name',
         onDelete: function(){
-            weui.confirm('确定删除该图片？', function(){
+            gqui.confirm('确定删除该图片？', function(){
                 --uploadCount;
                 uploadCountDom.innerHTML = uploadCount;
 
@@ -475,7 +475,7 @@ document.querySelector('#uploaderFiles').addEventListener('click', function(e){
 var uploadCustomFileList = [];
 
 // 这里是简单的调用，其余api请参考文档
-weui.uploader('#uploaderCustom', {
+gqui.uploader('#uploaderCustom', {
     url: 'http://localhost:8002/upload',
     auto: false,
     onQueued: function() {
@@ -507,7 +507,7 @@ document.querySelector('#uploaderCustomFiles').addEventListener('click', functio
     }
     var gallery = weui.gallery(url, {
         onDelete: function(){
-            weui.confirm('确定删除该图片？', function(){
+            gqui.confirm('确定删除该图片？', function(){
                 var index;
                 for (var i = 0, len = uploadCustomFileList.length; i < len; ++i) {
                     var file = uploadCustomFileList[i];
